@@ -3,6 +3,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { words } from "../../constant/index.js";
 import { ArrowDown } from "lucide-react";
+import { SplitText } from "gsap/SplitText";
+gsap.registerPlugin(SplitText);
 
 const Hero = () => {
   const cursorRef = useRef(null);
@@ -57,23 +59,29 @@ const Hero = () => {
   }, []);
 
   useGSAP(() => {
-    gsap.from(".word", {
+    const splits = gsap.utils.toArray(".words").map(
+      (el) => new SplitText(el, { type: "chars" })
+    )
+    
+    const allChars = splits.flatMap((split) => split.chars);
+
+    gsap.from(allChars, {
       opacity: 0,
-      yPercent: 100,
-      ease: "expo.out",
-      stagger: 0.1,
-      duration: 1,
+      yPercent: 50,
+      ease: "expo.inOut",
+      stagger: 0.05,
+      duration: 1.2,
     });
     gsap.from(".hero-sub", {
       opacity: 0,
-      delay: 0.5,
+      delay: 1.8,
       xPercent: 50,
       ease: "expo.out",
       duration: 0.8,
     });
     gsap.from(".arrow-down", {
       opacity: 0,
-      delay: 1,
+      delay: 2.3,
       yPercent: -20,
       ease: "expo.out",
       duration: 0.8,
@@ -85,10 +93,9 @@ const Hero = () => {
     const text = "Izaz";
     let typed = 0;
 
-
     el.textContent = text;
-    
-    el.style.padding = "2px 6px"; 
+
+    el.style.padding = "2px 6px";
     gsap.set(el, { width: "auto", height: "25px", overflow: "visible" });
     const fullWidth = el.offsetWidth;
     const fullHeight = el.offsetHeight;
@@ -97,9 +104,9 @@ const Hero = () => {
     gsap.set(el, {
       width: 0,
       height: fullHeight,
-      paddingLeft: 0,  
-      paddingRight: 0, 
-      paddingTop: 2, 
+      paddingLeft: 0,
+      paddingRight: 0,
+      paddingTop: 1,
       paddingBottom: 2,
       overflow: "hidden",
     });
@@ -108,13 +115,12 @@ const Hero = () => {
 
     tl.to(el, {
       width: fullWidth,
-      paddingLeft: 6,  
-      paddingRight: 6, 
+      paddingLeft: 6,
+      paddingRight: 6,
       duration: 0.55,
       ease: "expo.out",
     });
 
-   
     tl.to(
       {},
       {
@@ -133,11 +139,10 @@ const Hero = () => {
       },
     );
 
-
     tl.to(el, {
       width: 0,
-      paddingLeft: 0,  
-      paddingRight: 0, 
+      paddingLeft: 0,
+      paddingRight: 0,
       duration: 0.45,
       ease: "expo.in",
       delay: 1.2,
@@ -159,14 +164,16 @@ const Hero = () => {
         <h3 className="top-sub-left">
           I'm <span className="type-effect">Izaz</span>
         </h3>
-        <h3 className="top-sub-right">and <span className="type-effect-right">he said</span></h3>
+        <h3 className="top-sub-right">
+          and <span className="type-effect-right">he said</span>
+        </h3>
       </div>
       <section className="hero">
         <div className="hero-text-wrap" ref={textWrapRef}>
           <h1 className="hero-heading">
             {words.map((w, i) => (
               <React.Fragment key={i}>
-                <span className={`word${w.italic ? " italic" : ""}`}>
+                <span className={`words${w.italic ? " italic" : ""}`}>
                   {w.text}
                 </span>
                 {i < words.length - 1 && " "}

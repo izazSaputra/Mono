@@ -67,6 +67,33 @@ body {
   user-select: none;
 }
 
+.top-sub {
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-sub-left {
+  position: absolute;
+  left: 22.7vw;
+  top: 43%;
+  transform: translateY(-50%);
+  font-family: "Geist", sans-serif;
+  font-weight: 200;
+  font-size: 20px;
+}
+
+.top-sub-right {
+  position: absolute;
+  white-space: nowrap;
+  left: 43.5vw;
+  top: 43.5%;
+  transform: translateY(-50%);
+  font-family: "Geist", sans-serif;
+  font-weight: 200;
+  font-size: 20px;
+}
+
 .word {
   display: inline-block;
 }
@@ -116,4 +143,38 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.arrow-down {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+
+.type-effect {
+  transform: translateY(20%);
+  display: inline-block;
+  vertical-align: baseline;
+  white-space: nowrap;
+  background: #fff;
+  color: #000;
+  font-weight: 400;
+  font-size: 20px;
+  overflow: hidden;
+}
+
+.type-effect-right {
+  position: absolute; 
+  left: 16.8vw;
+  transform: translateY(20%);
+  display: inline-block;
+  vertical-align: baseline;
+  white-space: nowrap;
+  background: #fff;
+  color: #000;
+  font-weight: 400;
+  font-size: 20px;
+  overflow: hidden;
 }

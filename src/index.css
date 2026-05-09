@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+@font-face {
+  font-family: "GeneralSans";
+  src:
+    url("../fonts/GeneralSans-Regular.woff2") format("woff2"),
+    url("../fonts/GeneralSans-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: "GeneralSans", Arial, sans-serif;
+  width: 100%;
+}
+
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-text-wrap {
+  position: relative;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.hero-heading {
+  font-family: "GeneralSans", Arial, sans-serif;
+  font-weight: 300;
+  font-size: 95px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.hero-heading--outline {
+  position: absolute;
+  inset: 0;
+
+  background: black;
+  color: transparent;
+  -webkit-text-stroke: 1px white;
+
+  --cx: -200px;
+  --cy: -200px;
+  clip-path: circle(15px at var(--cx) var(--cy));
+  -webkit-clip-path: circle(15px at var(--cx) var(--cy));
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.word {
+  display: inline-block;
+}
+
+.italic {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hero-sub {
+  position: absolute;
+  right: -135px;
+  top: 75%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-family: "Geist", sans-serif;
+  font-weight: 200;
+  font-size: 20px;
+}
+
+.hero-text-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.cursor {
+  width: 30px;
+  height: 30px;
+  border: 2px solid white;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+
+.cursor.active {
+  transform: translate(-50%, -50%) scale(2);
+  background: #fff;
+  mix-blend-mode: difference;
+}
+
+#about {
+  background-color: #ffff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

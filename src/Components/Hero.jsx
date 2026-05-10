@@ -165,7 +165,7 @@ const Hero = () => {
           I'm <span className="type-effect">Izaz</span>
         </h3>
         <h3 className="top-sub-right">
-          and <span className="type-effect-right">he said</span>
+          and <span className="type-effect-right">I said</span>
         </h3>
       </div>
       <section className="hero">

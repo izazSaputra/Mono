@@ -87,7 +87,7 @@ body {
 .top-sub-right {
   position: absolute;
   white-space: nowrap;
-  left: 43.5vw;
+  left: 44.5vw;
   top: 43.5%;
   transform: translateY(-50%);
   font-family: "Geist", sans-serif;
@@ -139,7 +139,7 @@ body {
 }
 
 #about {
-  background-color: #fff;
+  background-color: #000000;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -191,7 +191,7 @@ body {
   font-family: "Inter", sans-serif;
   font-weight: 387;
   font-size: 55px;
-  color: #000;
+  color: #ffffff;
   overflow: visible; 
 }
 

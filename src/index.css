@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 @font-face {
   font-family: "GeneralSans";
@@ -138,11 +139,12 @@ body {
 }
 
 #about {
-  background-color: #ffff;
+  background-color: #fff;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .arrow-down {
@@ -177,4 +179,22 @@ body {
   font-weight: 400;
   font-size: 20px;
   overflow: hidden;
+}
+
+.about-text {
+  width: 70%;
+  text-align: left;
+  transform: translateX(3%);
+
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+  font-family: "Inter", sans-serif;
+  font-weight: 387;
+  font-size: 55px;
+  color: #000;
+  overflow: visible; 
+}
+
+.about-text .word {
+  display: inline-block;
 }

@@ -12,6 +12,8 @@ const Hero = () => {
   const textWrapRef = useRef(null);
 
   useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const outline = outlineRef.current;
     const textWrap = textWrapRef.current;
     const cursor = cursorRef.current;
@@ -96,7 +98,7 @@ const Hero = () => {
     el.textContent = text;
 
     el.style.padding = "2px 6px";
-    gsap.set(el, { width: "auto", height: "25px", overflow: "visible" });
+    gsap.set(el, { width: "auto", height: "35px", overflow: "visible" });
     const fullWidth = el.offsetWidth;
     const fullHeight = el.offsetHeight;
 
@@ -165,7 +167,7 @@ const Hero = () => {
           I'm <span className="type-effect">Izaz</span>
         </h3>
         <h3 className="top-sub-right">
-          and <span className="type-effect-right">I said</span>
+          Building <span className="top-sub-by">interfaces that feel</span> <span className="type-effect-right">alive</span>
         </h3>
       </div>
       <section className="hero">
@@ -196,7 +198,7 @@ const Hero = () => {
             ))}
           </h1>
 
-          <h3 className="hero-sub">There is clarity.</h3>
+        
         </div>
         <div className="arrow-down">
           <ArrowDown size={50} strokeWidth={1} />

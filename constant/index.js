@@ -1,8 +1,7 @@
 const words = [
-  { text: "Between", italic: false },
-  { text: "black", italic: true },
-  { text: "and", italic: false },
-  { text: "white", italic: true },
+  { text: "INTERACTIVE", italic: false },
+  { text: "WEB", italic: true },
+  { text: "DEVELOPER", italic: false },
 ]
 
 const navLinks = [

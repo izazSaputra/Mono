@@ -46,8 +46,7 @@ body {
 .hero-heading {
   font-family: "GeneralSans", Arial, sans-serif;
   font-weight: 300;
-  font-size: 95px;
-  text-align: center;
+  font-size: clamp(30px, 9vw, 115px);
   white-space: nowrap;
 }
 
@@ -76,23 +75,29 @@ body {
 
 .top-sub-left {
   position: absolute;
-  left: 22.7vw;
-  top: 43%;
+  left: 3.6vw;
+  top: 40%;
   transform: translateY(-50%);
   font-family: "Geist", sans-serif;
   font-weight: 200;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .top-sub-right {
   position: absolute;
   white-space: nowrap;
-  left: 44.5vw;
-  top: 43.5%;
+  left: 45vw;
+  top: 40%;
   transform: translateY(-50%);
   font-family: "Geist", sans-serif;
   font-weight: 200;
-  font-size: 20px;
+  font-size: 30px;
+}
+
+.top-sub-by {
+  display: inline-block;
+  margin-left: 27.4vw;
+  
 }
 
 .word {
@@ -107,13 +112,13 @@ body {
 
 .hero-sub {
   position: absolute;
-  right: -135px;
+  right: -200px;  
   top: 75%;
   transform: translateY(-50%);
   white-space: nowrap;
   font-family: "Geist", sans-serif;
   font-weight: 200;
-  font-size: 20px;
+  font-size: clamp(14px, 1.4vw, 22px); 
 }
 
 .hero-text-wrap {
@@ -163,21 +168,20 @@ body {
   background: #fff;
   color: #000;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 30px;
   overflow: hidden;
 }
 
 .type-effect-right {
   position: absolute; 
-  left: 16.8vw;
-  transform: translateY(20%);
+  left: 47vw;
   display: inline-block;
   vertical-align: baseline;
   white-space: nowrap;
   background: #fff;
   color: #000;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 30px;
   overflow: hidden;
 }
 
@@ -185,7 +189,6 @@ body {
   width: 70%;
   text-align: left;
   transform: translateX(3%);
-
   letter-spacing: -0.04em;
   line-height: 1.2;
   font-family: "Inter", sans-serif;
@@ -197,4 +200,76 @@ body {
 
 .about-text .word {
   display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .cursor {
+    display: none;
+  }
+
+
+  .hero-heading {
+    font-size: clamp(28px, 12vw, 95px);
+    white-space: normal;      
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .top-sub {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 16px 0;
+    text-align: center;
+  }
+
+  .top-sub-left,
+  .top-sub-right {
+    position: static;
+    transform: none;
+    font-size: 18px;
+    left: unset;
+    top: unset;
+  }
+
+  .top-sub-by {
+    display: inline;
+    margin-left: 0;
+  }
+
+  .type-effect,
+  .type-effect-right {
+    position: static; 
+    font-size: 18px;
+    left: unset;
+  }
+
+  .hero {
+    justify-content: center;
+    padding: 0 16px;
+  }
+
+  .hero-sub {
+    position: static;
+    transform: none;
+    right: unset;
+    top: unset;
+    margin-top: 12px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .hero-text-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-text {
+    font-size: clamp(28px, 7vw, 55px);
+    width: 90%;
+    transform: none;
+  }
 }

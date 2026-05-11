@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const About = () => {
   useGSAP(() => {
-    // Split the paragraph into individual words
     const split = new SplitText(".about-text", { type: "words" });
 
     const tl = gsap.timeline({

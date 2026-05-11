@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 @font-face {
   font-family: "GeneralSans";
@@ -97,7 +97,6 @@ body {
 .top-sub-by {
   display: inline-block;
   margin-left: 27.4vw;
-  
 }
 
 .word {
@@ -112,13 +111,13 @@ body {
 
 .hero-sub {
   position: absolute;
-  right: -200px;  
+  right: -200px;
   top: 75%;
   transform: translateY(-50%);
   white-space: nowrap;
   font-family: "Geist", sans-serif;
   font-weight: 200;
-  font-size: clamp(14px, 1.4vw, 22px); 
+  font-size: clamp(14px, 1.4vw, 22px);
 }
 
 .hero-text-wrap {
@@ -157,7 +156,6 @@ body {
   bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
-
 }
 
 .type-effect {
@@ -173,7 +171,7 @@ body {
 }
 
 .type-effect-right {
-  position: absolute; 
+  position: absolute;
   left: 47vw;
   display: inline-block;
   vertical-align: baseline;
@@ -195,7 +193,7 @@ body {
   font-weight: 387;
   font-size: 55px;
   color: #ffffff;
-  overflow: visible; 
+  overflow: visible;
 }
 
 .about-text .word {
@@ -207,10 +205,11 @@ body {
     display: none;
   }
 
-
   .hero-heading {
-    font-size: clamp(28px, 12vw, 95px);
-    white-space: normal;      
+    font-size: clamp(28px, 11vw, 95px);
+    white-space: normal;
+    word-break: keep-all; /* ← tidak potong di tengah kata */
+    overflow-wrap: normal;
     text-align: center;
     line-height: 1.1;
   }
@@ -239,11 +238,18 @@ body {
     margin-left: 0;
   }
 
-  .type-effect,
-  .type-effect-right {
-    position: static; 
+  .type-effect {
+    position: static;
     font-size: 18px;
+    vertical-align: middle;
     left: unset;
+  }
+  .type-effect-right {
+    position: static;
+    left: unset;
+    transform: none;
+    vertical-align: middle;
+    font-size: 18px;
   }
 
   .hero {
@@ -262,9 +268,8 @@ body {
   }
 
   .hero-text-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 95vw;
+    overflow: hidden;
   }
 
   .about-text {

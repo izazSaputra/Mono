@@ -61,10 +61,10 @@ const Hero = () => {
   }, []);
 
   useGSAP(() => {
-    const splits = gsap.utils.toArray(".words").map(
-      (el) => new SplitText(el, { type: "chars" })
-    )
-    
+    const splits = gsap.utils
+      .toArray(".words")
+      .map((el) => new SplitText(el, { type: "chars" }));
+
     const allChars = splits.flatMap((split) => split.chars);
 
     gsap.from(allChars, {
@@ -98,7 +98,13 @@ const Hero = () => {
     el.textContent = text;
 
     el.style.padding = "2px 6px";
-    gsap.set(el, { width: "auto", height: "35px", overflow: "visible" });
+
+    const isMobile = window.innerWidth <= 768;
+    gsap.set(el, {
+      width: "auto",
+      height: isMobile ? "20px" : "35px",
+      overflow: "visible",
+    });
     const fullWidth = el.offsetWidth;
     const fullHeight = el.offsetHeight;
 
@@ -167,7 +173,8 @@ const Hero = () => {
           I'm <span className="type-effect">Izaz</span>
         </h3>
         <h3 className="top-sub-right">
-          Building <span className="top-sub-by">interfaces that feel</span> <span className="type-effect-right">alive</span>
+          Building <span className="top-sub-by">interfaces that feel</span>{" "}
+          <span className="type-effect-right">alive</span>
         </h3>
       </div>
       <section className="hero">
@@ -197,8 +204,6 @@ const Hero = () => {
               </React.Fragment>
             ))}
           </h1>
-
-        
         </div>
         <div className="arrow-down">
           <ArrowDown size={50} strokeWidth={1} />

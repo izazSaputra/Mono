@@ -102,7 +102,7 @@ const Hero = () => {
     const isMobile = window.innerWidth <= 768;
     gsap.set(el, {
       width: "auto",
-      height: isMobile ? "20px" : "35px",
+      height: isMobile ? "25px" : "35px",
       overflow: "visible",
     });
     const fullWidth = el.offsetWidth;

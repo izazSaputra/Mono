@@ -98,7 +98,6 @@ const Skills = () => {
       <div className="skills-header">
         <div className="skills-header-left">
           <div className="skills-label">
-            <span className="label-dot" />
             MY SKILLS
           </div>
           <h2 className="skills-title">

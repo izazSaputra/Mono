@@ -296,10 +296,10 @@ body {
 }
 
 .skills-title {
-  font-family: "GeneralSans", Arial, sans-serif;
-  font-weight: 300;
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.05em;
   font-size: clamp(32px, 4.5vw, 62px);
-  letter-spacing: -0.04em;
   line-height: 1.1;
   color: #ffffff;
   margin-bottom: 24px;
@@ -360,7 +360,7 @@ body {
   background: rgba(0, 0, 0, 0.025);
 
   font-family: "Geist", sans-serif;
-  font-weight: 300;
+  font-weight: 500;
   font-size: clamp(15px, 1.4vw, 20px);
   letter-spacing: 0.01em;
   color: rgba(255, 255, 255, 0.6);
@@ -504,5 +504,89 @@ body {
     font-size: clamp(28px, 7vw, 55px);
     width: 90%;
     transform: none;
+  }
+}
+
+
+/*PortfolioGrid*/
+
+.portfolio-page {
+  font-family: 'GeneralSans', Arial, sans-serif;
+  background-color: #000;
+  color: white;
+  padding: 40px 40px;
+}
+
+.portfolio-page .topbar {
+  background-color: #000;
+  padding: 28px 40px 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.portfolio-page .tagline {
+  text-align: left;
+  margin-right: 40vh;
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 320px;
+  font-family: 'Geist', sans-serif;
+}
+
+.portfolio-page .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.8fr;
+  gap: 4px;
+  background-color: #000;
+  padding: 0 4px;
+}
+
+.portfolio-page .grid-item {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.portfolio-page .grid-item img {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.portfolio-page .grid-item.item-3 img {
+  object-fit: contain;
+  background-color: #f5f5f5;
+}
+.portfolio-page .grid-item figcaption {
+  padding: 18px 4px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.portfolio-page .grid-item .title {
+  font-family: 'Geist', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.portfolio-page .grid-item .subtitle {
+  font-size: 16px;
+  color: white;
+}
+
+@media (max-width: 900px) {
+  .portfolio-page .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-page .topbar {
+    justify-content: flex-start;
+  }
+
+  .portfolio-page .tagline {
+    max-width: 100%;
   }
 }

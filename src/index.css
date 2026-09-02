@@ -127,20 +127,33 @@ body {
 }
 
 .cursor {
-  width: 30px;
-  height: 30px;
+  --cursor-size: 30px;
+  width: var(--cursor-size);
+  height: var(--cursor-size);
   border: 2px solid white;
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 999;
+  transition:
+    width 0.28s ease,
+    height 0.28s ease,
+    border-radius 0.28s ease,
+    background 0.28s ease;
 }
 
 .cursor.active {
   transform: translate(-50%, -50%) scale(2);
   background: #fff;
   mix-blend-mode: difference;
+}
+
+.cursor.is-reveal {
+  --cursor-size: 140px;
+  border-radius: 0;
+  background: transparent;
+  mix-blend-mode: normal;
 }
 
 #about {
@@ -547,7 +560,19 @@ body {
   margin: 0;
 }
 
-.portfolio-page .grid-item img {
+.portfolio-page .portfolio-media {
+  position: relative;
+  overflow: hidden;
+  --rx: 50%;
+  --ry: 50%;
+  --reveal-size: 0px;
+}
+
+.portfolio-page .portfolio-media.is-revealing {
+  --reveal-size: 140px;
+}
+
+.portfolio-page .portfolio-media img {
   width: 100%;
   height: 60vh;
   object-fit: cover;
@@ -555,9 +580,37 @@ body {
   display: block;
 }
 
-.portfolio-page .grid-item.item-3 img {
-  object-fit: contain;
+.portfolio-page .portfolio-img--bw {
+  filter: grayscale(1);
+}
+
+.portfolio-page .portfolio-img--color {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mask-image: linear-gradient(#fff, #fff);
+  -webkit-mask-image: linear-gradient(#fff, #fff);
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-size: var(--reveal-size) var(--reveal-size);
+  -webkit-mask-size: var(--reveal-size) var(--reveal-size);
+  mask-position: calc(var(--rx) - var(--reveal-size) / 2)
+    calc(var(--ry) - var(--reveal-size) / 2);
+  -webkit-mask-position: calc(var(--rx) - var(--reveal-size) / 2)
+    calc(var(--ry) - var(--reveal-size) / 2);
+  transition:
+    mask-size 0.28s ease,
+    -webkit-mask-size 0.28s ease;
+}
+
+.portfolio-page .grid-item.item-3 .portfolio-media {
   background-color: #f5f5f5;
+}
+
+.portfolio-page .grid-item.item-3 .portfolio-media img {
+  object-fit: contain;
 }
 .portfolio-page .grid-item figcaption {
   padding: 18px 4px 32px;

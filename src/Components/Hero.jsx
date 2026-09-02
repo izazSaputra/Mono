@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import { words } from "../../constant/index.js";
 import { ArrowDown } from "lucide-react";
 import { SplitText } from "gsap/SplitText";
+import { initCursor } from "../utils/cursor.js";
 gsap.registerPlugin(SplitText);
 
 const Hero = () => {
@@ -16,7 +17,7 @@ const Hero = () => {
 
     const outline = outlineRef.current;
     const textWrap = textWrapRef.current;
-    const cursor = cursorRef.current;
+    const cleanupCursor = initCursor(cursorRef.current);
 
     const xTo = gsap.quickTo(outline, "--cx", {
       duration: 0.4,
@@ -27,23 +28,10 @@ const Hero = () => {
       ease: "power3.out",
     });
 
-    const cursorXTo = gsap.quickTo(cursor, "left", {
-      duration: 0.15,
-      ease: "power2.out",
-    });
-    const cursorYTo = gsap.quickTo(cursor, "top", {
-      duration: 0.15,
-      ease: "power2.out",
-    });
-
     const handleMove = (e) => {
       const rect = textWrap.getBoundingClientRect();
-
       xTo(e.clientX - rect.left);
       yTo(e.clientY - rect.top);
-
-      cursorXTo(e.clientX);
-      cursorYTo(e.clientY);
     };
 
     const handleLeave = () => {
@@ -55,6 +43,7 @@ const Hero = () => {
     window.addEventListener("mouseleave", handleLeave);
 
     return () => {
+      cleanupCursor();
       window.removeEventListener("mousemove", handleMove);
       window.removeEventListener("mouseleave", handleLeave);
     };

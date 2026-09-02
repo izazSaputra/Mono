@@ -1,27 +1,32 @@
 import React from "react";
-import gsap from "gsap";
-import mojito from "../assets/mojito.png";
-import smilework from "../assets/smilework.png";
-import samira from "../assets/samira.png";
+import mojitoBw from "../assets/mojito.png";
+import mojitoColor from "../assets/mojito-color.png";
+import smileworkBw from "../assets/smilework.png";
+import smileworkColor from "../assets/smilework-color.png";
+import samiraBw from "../assets/samira.png";
+import samiraColor from "../assets/samira-color.png";
 
 const items = [
   {
     id: 1,
-    image: mojito,
+    imageBw: mojitoBw,
+    imageColor: mojitoColor,
     alt: "Interactive web design for selling cocktails.",
     title: "Mojito",
     subtitle: "Interactive Web",
   },
   {
     id: 2,
-    image: smilework,
+    imageBw: smileworkBw,
+    imageColor: smileworkColor,
     alt: "Modern web portfolio  for an interior arcitecture firm.",
     title: "Smilework",
     subtitle: "Web Portfolio",
   },
   {
     id: 3,
-    image: samira,
+    imageBw: samiraBw,
+    imageColor: samiraColor,
     alt: "Web Presence for regional travel agency.",
     title: "Samira Travel",
     subtitle: "Web Development",
@@ -42,7 +47,19 @@ export default function PortfolioGrid() {
       <main className="grid">
         {items.map((item) => (
           <figure className={`grid-item item-${item.id}`} key={item.id}>
-            <img src={item.image} alt={item.alt} />
+            <div className="portfolio-media" data-cursor-reveal>
+              <img
+                className="portfolio-img portfolio-img--bw"
+                src={item.imageBw}
+                alt={item.alt}
+              />
+              <img
+                className="portfolio-img portfolio-img--color"
+                src={item.imageColor}
+                alt=""
+                aria-hidden="true"
+              />
+            </div>
             <figcaption>
               <span className="title">{item.title}</span>
               <span className="subtitle">{item.subtitle}</span>

@@ -56,27 +56,39 @@ const Hero = () => {
 
     const allChars = splits.flatMap((split) => split.chars);
 
-    gsap.from(allChars, {
-      opacity: 0,
-      yPercent: 50,
-      ease: "expo.inOut",
-      stagger: 0.05,
-      duration: 1.2,
+    const introTl = gsap.timeline({
+      default: {
+        ease: "expo.out",
+      },
     });
-    gsap.from(".hero-sub", {
+    
+    introTl.from(allChars, {
+      yPercent: 130,
+      duration: 1.4,
+      rotate: 4,
       opacity: 0,
-      delay: 1.8,
-      xPercent: 50,
-      ease: "expo.out",
-      duration: 0.8,
+      stagger: {
+        each: 0.025,
+        from: "start"
+      },
     });
-    gsap.from(".arrow-down", {
-      opacity: 0,
-      delay: 2.3,
-      yPercent: -20,
-      ease: "expo.out",
-      duration: 0.8,
-    });
+
+    introTl.from(['.top-sub-left', '.top-sub-right'],
+      {
+        y:20,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.12,
+    },
+    "-=0.7");
+
+    introTl.from(['.arrow-down'],
+      {
+        y: -20,
+        opacity: 0,
+        duration: 0.8,
+      },
+    "-=0.35");
 
     const el = document.querySelector(".type-effect");
     if (!el) return;

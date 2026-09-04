@@ -5,7 +5,8 @@ import { words } from "../../constant/index.js";
 import { ArrowDown } from "lucide-react";
 import { SplitText } from "gsap/SplitText";
 import { initCursor } from "../utils/cursor.js";
-gsap.registerPlugin(SplitText);
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const Hero = () => {
   const cursorRef = useRef(null);
@@ -13,6 +14,8 @@ const Hero = () => {
   const textWrapRef = useRef(null);
   const webRef = useRef(null);
   const webOutlineRef = useRef(null);
+  const heroRef = useRef(null);
+  const arrowRef = useRef(null);
 
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
@@ -275,6 +278,46 @@ const Hero = () => {
     });
   }, []);
 
+  useGSAP(() => {
+    const hero = heroRef.current;
+    const arrow = arrowRef.current;
+    const textWrap = textWrapRef.current;
+
+    if (!hero || !arrow || !textWrap) return;
+
+    const exitTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: hero,
+        start: "top top",
+        end: "+=100%",
+        scrub: 1,
+        pin: true,
+      },
+    });
+
+    exitTl
+      .to(
+        textWrap,
+        {
+          scale: 0.78,
+          yPercent: -5,
+          opacity: 0,
+          filter: "blur(14px)",
+          ease: "none",
+        },
+        0,
+      )
+      .to(
+        arrow,
+        {
+          y: 80,
+          opacity: 0,
+          ease: "none",
+        },
+        0,
+      );
+  }, []);
+
   return (
     <>
       <div ref={cursorRef} className="cursor" />
@@ -288,7 +331,7 @@ const Hero = () => {
           <span className="type-effect-right">alive</span>
         </h3>
       </div>
-      <section className="hero">
+      <section className="hero" ref={heroRef}>
         <div className="hero-text-wrap" ref={textWrapRef}>
           <h1 className="hero-heading">
             {words.map((w, i) => (
@@ -322,7 +365,7 @@ const Hero = () => {
             ))}
           </h1>
         </div>
-        <div className="arrow-down">
+        <div className="arrow-down" ref={arrowRef}>
           <ArrowDown size={50} strokeWidth={1} />
         </div>
       </section>

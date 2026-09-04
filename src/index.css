@@ -185,31 +185,6 @@ body {
   transform: translateX(-50%);
 }
 
-.type-effect {
-  transform: translateY(20%);
-  display: inline-block;
-  vertical-align: baseline;
-  white-space: nowrap;
-  background: #fff;
-  color: #000;
-  font-weight: 400;
-  font-size: 30px;
-  overflow: hidden;
-}
-
-.type-effect-right {
-  position: absolute;
-  left: 47vw;
-  display: inline-block;
-  vertical-align: baseline;
-  white-space: nowrap;
-  background: #fff;
-  color: #000;
-  font-weight: 400;
-  font-size: 30px;
-  overflow: hidden;
-}
-
 .about-text {
   width: 70%;
   text-align: left;
@@ -460,52 +435,6 @@ body {
     line-height: 1.1;
   }
 
-  .top-sub {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 60px 16px 0;
-    text-align: center;
-  }
-
-  .top-sub-left {
-    position: static;
-    transform: none;
-    font-size: 18px;
-    left: unset;
-    top: unset;
-  }
-
-  .top-sub-right {
-    position: static;
-    transform: none;
-    left: unset;
-    top: unset;
-    font-size: 18px;
-  }
-
-  .top-sub-by {
-    display: inline;
-    margin-left: 0;
-  }
-
-  .type-effect {
-    position: static;
-    font-size: 18px;
-    vertical-align: middle;
-    left: unset;
-    transform: translateY(0) !important;
-  }
-  .type-effect-right {
-    position: static;
-    left: unset;
-    transform: none;
-    vertical-align: middle;
-    font-size: 18px;
-  }
-
   .hero {
     justify-content: center;
     padding: 0 16px;
@@ -654,4 +583,50 @@ body {
   .portfolio-page .tagline {
     max-width: 100%;
   }
+}
+
+.mono-index {
+  position: fixed;
+  top: 40px;
+  left: 3.6vw;
+  z-index: 50;
+
+  font-family: "Geist", sans-serif;
+  text-transform: uppercase;
+
+  pointer-events: none;
+}
+
+.mono-index__chapter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.mono-index__line {
+  display: inline-block;
+  width: 42px;
+  height: 1px;
+  margin-left: 8px;
+  background: rgba(255, 255, 255, 0.65);
+  transform-origin: left center;
+}
+
+.mono-index__identity {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  min-height: 58px;
+  font-size: 12px;
+  line-height: 1.45;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.48);
 }

@@ -17,6 +17,14 @@ const Hero = () => {
   const heroRef = useRef(null);
   const arrowRef = useRef(null);
 
+  const indexRef = useRef(null);
+  const indexLineRef = useRef(null);
+  const identityDataRef = useRef(null);
+
+  const identityNameRef = useRef(null);
+  const identityRoleRef = useRef(null);
+  const identityLocalRef = useRef(null);
+
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
@@ -160,41 +168,81 @@ const Hero = () => {
 
   useGSAP(() => {
     const splits = gsap.utils
-      .toArray(".words")
+      .toArray(textWrapRef.current.querySelectorAll(".words"))
       .map((el) => new SplitText(el, { type: "chars" }));
 
     const allChars = splits.flatMap((split) => split.chars);
 
-    const introTl = gsap.timeline({
-      defaults: {
-        ease: "expo.out",
-      },
-    });
+    const addType = (timeline, element, text, duration = 0.45) => {
+      if (!element) return;
 
-    introTl.from(allChars, {
-      yPercent: 130,
-      duration: 1.4,
-      rotate: 4,
+      element.textContent = "";
+
+      const state = {
+        count: 0,
+      };
+
+      timeline.to(state, {
+        count: text.length,
+        duration,
+        ease: "none",
+
+        onUpdate: () => {
+          const count = Math.round(state.count);
+          const typedText = text.slice(0, count);
+
+          element.textContent =
+            count < text.length ? `${typedText}_` : typedText;
+        },
+
+        onComplete: () => {
+          element.textContent = text;
+        },
+      });
+    };
+
+    const introTl = gsap.timeline();
+
+    introTl.from(indexRef.current, {
+      y: 8,
       opacity: 0,
-      stagger: {
-        each: 0.025,
-        from: "start",
-      },
+      duration: 0.4,
     });
 
     introTl.from(
-      [".top-sub-left", ".top-sub-right"],
+      indexLineRef.current,
       {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
+        scaleX: 0,
+        duration: 0.35,
+        ease: "power2.out",
       },
-      "-=0.7",
+      "-=0.15",
+    );
+
+    addType(introTl, identityNameRef.current, "IZAZ SAPUTRA", 0.4);
+
+    addType(introTl, identityRoleRef.current, "CREATIVE DEVELOPER", 0.45);
+
+    addType(introTl, identityLocalRef.current, "MALANG — INDONESIA", 0.45);
+
+    introTl.from(
+      allChars,
+      {
+        yPercent: 130,
+        rotate: 4,
+        opacity: 0,
+        duration: 1.4,
+
+        stagger: {
+          each: 0.025,
+          from: "start",
+        },
+      },
+      "-=0.1",
     );
 
     introTl.from(
-      [".arrow-down"],
+      arrowRef.current,
       {
         y: -20,
         opacity: 0,
@@ -203,79 +251,9 @@ const Hero = () => {
       "-=0.35",
     );
 
-    const el = document.querySelector(".type-effect");
-    if (!el) return;
-
-    const text = "Izaz";
-    let typed = 0;
-
-    el.textContent = text;
-
-    el.style.padding = "2px 6px";
-
-    const isMobile = window.innerWidth <= 768;
-    gsap.set(el, {
-      width: "auto",
-      height: isMobile ? "25px" : "35px",
-      overflow: "visible",
-    });
-    const fullWidth = el.offsetWidth;
-    const fullHeight = el.offsetHeight;
-
-    el.textContent = "";
-    gsap.set(el, {
-      width: 0,
-      height: fullHeight,
-      paddingLeft: 0,
-      paddingRight: 0,
-      paddingTop: 1,
-      paddingBottom: 2,
-      overflow: "hidden",
-    });
-
-    const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
-
-    tl.to(el, {
-      width: fullWidth,
-      paddingLeft: 6,
-      paddingRight: 6,
-      duration: 0.55,
-      ease: "expo.out",
-    });
-
-    tl.to(
-      {},
-      {
-        duration: 0.08 * text.length,
-        onUpdate: function () {
-          const count = Math.ceil(this.progress() * text.length);
-          if (count !== typed) {
-            typed = count;
-            el.textContent = text.slice(0, count);
-          }
-        },
-        onComplete: function () {
-          el.textContent = text;
-          typed = text.length;
-        },
-      },
-    );
-
-    tl.to(el, {
-      width: 0,
-      paddingLeft: 0,
-      paddingRight: 0,
-      duration: 0.45,
-      ease: "expo.in",
-      delay: 1.2,
-      onStart: () => {
-        typed = 0;
-        el.textContent = text;
-      },
-      onComplete: () => {
-        el.textContent = "";
-      },
-    });
+    return () => {
+      splits.forEach((split) => split.revert());
+    };
   }, []);
 
   useGSAP(() => {
@@ -322,14 +300,20 @@ const Hero = () => {
     <>
       <div ref={cursorRef} className="cursor" />
 
-      <div className="top-sub">
-        <h3 className="top-sub-left">
-          I'm <span className="type-effect">Izaz</span>
-        </h3>
-        <h3 className="top-sub-right">
-          Building <span className="top-sub-by">interfaces that feel</span>{" "}
-          <span className="type-effect-right">alive</span>
-        </h3>
+      <div className="mono-index">
+        <div ref={indexRef} className="mono-index__chapter">
+          <span>00</span>
+          <span>/</span>
+          <span>IDENTITY</span>
+
+          <span ref={indexLineRef} className="mono-index__line" />
+        </div>
+
+        <div ref={identityDataRef} className="mono-index__identity">
+          <p ref={identityNameRef} className="identity-name"></p>
+          <p ref={identityRoleRef} />
+          <p ref={identityLocalRef} />
+        </div>
       </div>
       <section className="hero" ref={heroRef}>
         <div className="hero-text-wrap" ref={textWrapRef}>

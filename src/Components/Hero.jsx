@@ -25,6 +25,8 @@ const Hero = () => {
   const identityRoleRef = useRef(null);
   const identityLocalRef = useRef(null);
 
+  const voidFieldRef = useRef(null);
+
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
@@ -164,6 +166,56 @@ const Hero = () => {
       window.removeEventListener("mousemove", handleWebMove);
       window.removeEventListener("mouseleave", resetWeb);
     };
+  }, []);
+
+  useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    const field = voidFieldRef.current;
+    if (!field) return;
+
+    gsap.set(field, {
+      "--mx": window.innerWidth / 2,
+      "--my": window.innerHeight / 2,
+      "--field-alpha": 0.015,
+    });
+  const xTo = gsap.quickTo(field, "--mx", {
+    duration: 0.6,
+    ease: "power3.out",
+  });
+
+  const yTo = gsap.quickTo(field, "--my", {
+    duration: 0.6,
+    ease: "power3.out",
+  });
+
+  const alphaTo = gsap.quickTo(field, "--field-alpha", {
+    duration: 0.8,
+    ease: "power2.out",
+  });
+
+  let idleTimer;
+
+  const handleMove = (e) => {
+    xTo(e.clientX);
+    yTo(e.clientY);
+
+    alphaTo(0.055);
+
+    clearTimeout(idleTimer);
+
+    idleTimer = setTimeout(() => {
+      alphaTo(0.018);
+    }, 700);
+  };
+
+  window.addEventListener("mousemove", handleMove);
+
+  return () => {
+    clearTimeout(idleTimer);
+    window.removeEventListener("mousemove", handleMove);
+  };
+
   }, []);
 
   useGSAP(() => {
@@ -309,6 +361,11 @@ const Hero = () => {
           <span ref={indexLineRef} className="mono-index__line" />
         </div>
 
+        <div className="mono-mark">
+          <span>MONO</span>
+          <span>/ 2026 </span>
+        </div>
+
         <div ref={identityDataRef} className="mono-index__identity">
           <p ref={identityNameRef} className="identity-name"></p>
           <p ref={identityRoleRef} />
@@ -316,6 +373,7 @@ const Hero = () => {
         </div>
       </div>
       <section className="hero" ref={heroRef}>
+        <div ref={voidFieldRef} className="void-field" aria-hidden="true" />
         <div className="hero-text-wrap" ref={textWrapRef}>
           <h1 className="hero-heading">
             {words.map((w, i) => (

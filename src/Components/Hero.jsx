@@ -19,6 +19,7 @@ const Hero = () => {
 
     const outline = outlineRef.current;
     const textWrap = textWrapRef.current;
+
     const cleanupCursor = initCursor(cursorRef.current);
 
     const xTo = gsap.quickTo(outline, "--cx", {
@@ -52,104 +53,107 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-  if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
-  const web = webRef.current;
-  const webOutline = webOutlineRef.current;
+    const web = webRef.current;
+    const webOutline = webOutlineRef.current;
+    const cursor = cursorRef.current;
 
-  if (!web || !webOutline) return;
+    if (!web || !webOutline || !cursor) return;
 
-  const targets = [web, webOutline];
+    const targets = [web, webOutline];
 
-  gsap.set(targets, {
-    transformOrigin: "50% 60%",
-  });
+    gsap.set(targets, {
+      transformOrigin: "50% 90%",
+    });
 
-  const scaleXTo = gsap.quickTo(targets, "scaleX", {
-    duration: 0.6,
-    ease: "power3.out",
-  });
+    const scaleXTo = gsap.quickTo(targets, "scaleX", {
+      duration: 0.6,
+      ease: "power3.out",
+    });
 
-  const scaleYTo = gsap.quickTo(targets, "scaleY", {
-    duration: 0.6,
-    ease: "power3.out",
-  });
+    const scaleYTo = gsap.quickTo(targets, "scaleY", {
+      duration: 0.6,
+      ease: "power3.out",
+    });
 
-  const skewTo = gsap.quickTo(targets, "skewX", {
-    duration: 0.5,
-    ease: "power3.out",
-  });
+    const skewTo = gsap.quickTo(targets, "skewX", {
+      duration: 0.5,
+      ease: "power3.out",
+    });
 
-  const xTo = gsap.quickTo(targets, "x", {
-    duration: 0.6,
-    ease: "power3.out",
-  });
+    const xTo = gsap.quickTo(targets, "x", {
+      duration: 0.6,
+      ease: "power3.out",
+    });
 
-  const yTo = gsap.quickTo(targets, "y", {
-    duration: 0.6,
-    ease: "power3.out",
-  });
+    const yTo = gsap.quickTo(targets, "y", {
+      duration: 0.6,
+      ease: "power3.out",
+    });
 
-  const handleWebMove = (e) => {
-    const rect = web.getBoundingClientRect();
+    const cursorScaleTo = gsap.quickTo(cursor, "--cursor-scale", {
+      duration: 0.35,
+      ease: "power3.out",
+    });
 
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    const cursorBorderTo = gsap.quickTo(cursor, "borderWidth", {
+      duration: 0.35,
+      ease: "power3.out",
+    });
 
-    const deltaX = e.clientX - centerX;
-    const deltaY = e.clientY - centerY;
+    const handleWebMove = (e) => {
+      const rect = web.getBoundingClientRect();
 
-    const distance = Math.sqrt(
-      deltaX * deltaX + deltaY * deltaY,
-    );
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
 
-    const radius = 250;
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
 
-    const strength = gsap.utils.clamp(
-      0,
-      1,
-      1 - distance / radius,
-    );
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-    const normalizedX = gsap.utils.clamp(
-      -1,
-      1,
-      deltaX / radius,
-    );
+      const radius = 250;
 
-    const normalizedY = gsap.utils.clamp(
-      -1,
-      1,
-      deltaY / radius,
-    );
+      const strength = gsap.utils.clamp(0, 1, 1 - distance / radius);
 
-    scaleXTo(1 + strength * 0.14);
+      const normalizedX = gsap.utils.clamp(-1, 1, deltaX / radius);
 
-    scaleYTo(1 - strength * 0.04);
+      const normalizedY = gsap.utils.clamp(-1, 1, deltaY / radius);
 
-    skewTo(normalizedX * strength * -8);
+      scaleXTo(1 + strength * 0.14);
 
-    xTo(normalizedX * strength * 10);
+      scaleYTo(1 - strength * 0.04);
 
-    yTo(normalizedY * strength * 4);
-  };
+      skewTo(normalizedX * strength * -8);
 
-  const resetWeb = () => {
-    scaleXTo(1);
-    scaleYTo(1);
-    skewTo(0);
-    xTo(0);
-    yTo(0);
-  };
+      xTo(normalizedX * strength * 10);
 
-  window.addEventListener("mousemove", handleWebMove);
-  window.addEventListener("mouseleave", resetWeb);
+      yTo(normalizedY * strength * 4);
 
-  return () => {
-    window.removeEventListener("mousemove", handleWebMove);
-    window.removeEventListener("mouseleave", resetWeb);
-  };
-}, []);
+      cursorScaleTo(1 + strength * 0.65);
+
+      cursorBorderTo(2 - strength);
+    };
+
+    const resetWeb = () => {
+      scaleXTo(1);
+      scaleYTo(1);
+      skewTo(0);
+      xTo(0);
+      yTo(0);
+      cursorScaleTo(1);
+      cursorBorderTo(2);
+    };
+
+    window.addEventListener("mousemove", handleWebMove);
+    window.addEventListener("mouseleave", resetWeb);
+
+    return () => {
+      window.removeEventListener("mousemove", handleWebMove);
+      window.removeEventListener("mouseleave", resetWeb);
+    };
+  }, []);
 
   useGSAP(() => {
     const splits = gsap.utils
@@ -159,11 +163,11 @@ const Hero = () => {
     const allChars = splits.flatMap((split) => split.chars);
 
     const introTl = gsap.timeline({
-      default: {
+      defaults: {
         ease: "expo.out",
       },
     });
-    
+
     introTl.from(allChars, {
       yPercent: 130,
       duration: 1.4,
@@ -171,26 +175,30 @@ const Hero = () => {
       opacity: 0,
       stagger: {
         each: 0.025,
-        from: "start"
+        from: "start",
       },
     });
 
-    introTl.from(['.top-sub-left', '.top-sub-right'],
+    introTl.from(
+      [".top-sub-left", ".top-sub-right"],
       {
-        y:20,
+        y: 20,
         opacity: 0,
         duration: 0.8,
         stagger: 0.12,
-    },
-    "-=0.7");
+      },
+      "-=0.7",
+    );
 
-    introTl.from(['.arrow-down'],
+    introTl.from(
+      [".arrow-down"],
       {
         y: -20,
         opacity: 0,
         duration: 0.8,
       },
-    "-=0.35");
+      "-=0.35",
+    );
 
     const el = document.querySelector(".type-effect");
     if (!el) return;
@@ -285,9 +293,10 @@ const Hero = () => {
           <h1 className="hero-heading">
             {words.map((w, i) => (
               <React.Fragment key={i}>
-                <span 
-                ref={w.text === "WEB" ? webRef : null}
-                className={`words${w.italic ? " italic" : ""}`}>
+                <span
+                  ref={w.text === "WEB" ? webRef : null}
+                  className={`words${w.italic ? " italic" : ""}`}
+                >
                   {w.text}
                 </span>
                 {i < words.length - 1 && " "}
@@ -302,9 +311,10 @@ const Hero = () => {
           >
             {words.map((w, i) => (
               <React.Fragment key={i}>
-                <span 
-                ref={w.text === "WEB" ? webOutlineRef : null}
-                className={`word${w.italic ? " italic" : ""}`}>
+                <span
+                  ref={w.text === "WEB" ? webOutlineRef : null}
+                  className={`word${w.italic ? " italic" : ""}`}
+                >
                   {w.text}
                 </span>
                 {i < words.length - 1 && " "}

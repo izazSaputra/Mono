@@ -179,43 +179,42 @@ const Hero = () => {
       "--my": window.innerHeight / 2,
       "--field-alpha": 0.015,
     });
-  const xTo = gsap.quickTo(field, "--mx", {
-    duration: 0.6,
-    ease: "power3.out",
-  });
+    const xTo = gsap.quickTo(field, "--mx", {
+      duration: 0.6,
+      ease: "power3.out",
+    });
 
-  const yTo = gsap.quickTo(field, "--my", {
-    duration: 0.6,
-    ease: "power3.out",
-  });
+    const yTo = gsap.quickTo(field, "--my", {
+      duration: 0.6,
+      ease: "power3.out",
+    });
 
-  const alphaTo = gsap.quickTo(field, "--field-alpha", {
-    duration: 0.8,
-    ease: "power2.out",
-  });
+    const alphaTo = gsap.quickTo(field, "--field-alpha", {
+      duration: 0.8,
+      ease: "power2.out",
+    });
 
-  let idleTimer;
+    let idleTimer;
 
-  const handleMove = (e) => {
-    xTo(e.clientX);
-    yTo(e.clientY);
+    const handleMove = (e) => {
+      xTo(e.clientX);
+      yTo(e.clientY);
 
-    alphaTo(0.055);
+      alphaTo(0.055);
 
-    clearTimeout(idleTimer);
+      clearTimeout(idleTimer);
 
-    idleTimer = setTimeout(() => {
-      alphaTo(0.018);
-    }, 700);
-  };
+      idleTimer = setTimeout(() => {
+        alphaTo(0.012);
+      }, 700);
+    };
 
-  window.addEventListener("mousemove", handleMove);
+    window.addEventListener("mousemove", handleMove);
 
-  return () => {
-    clearTimeout(idleTimer);
-    window.removeEventListener("mousemove", handleMove);
-  };
-
+    return () => {
+      clearTimeout(idleTimer);
+      window.removeEventListener("mousemove", handleMove);
+    };
   }, []);
 
   useGSAP(() => {

@@ -67,6 +67,52 @@ body {
   background: transparent;
   mix-blend-mode: normal;
 }
+/* ============================================================
+   SECTIONINDEX.JSX
+   ============================================================ */
+.section-index {
+  position: fixed;
+  top: 40px;
+  left: 3.6vw;
+
+  z-index: 100;
+
+  pointer-events: none;
+}
+
+.section-index__content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.section-index__mask {
+  overflow: hidden;
+  line-height: 1;
+}
+
+.section-index__mask span {
+  display: block;
+}
+
+.section-index__line {
+  width: 42px;
+  height: 1px;
+
+  margin-left: 8px;
+
+  background: rgba(255, 255, 255, 0.45);
+
+  transform-origin: left center;
+}
 
 /* ============================================================
    HERO.JSX

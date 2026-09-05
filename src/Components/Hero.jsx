@@ -8,7 +8,7 @@ import { initCursor } from "../utils/cursor.js";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
-const Hero = () => {
+const Hero = ({ setActiveSection }) => {
   const cursorRef = useRef(null);
   const outlineRef = useRef(null);
   const textWrapRef = useRef(null);
@@ -17,8 +17,6 @@ const Hero = () => {
   const heroRef = useRef(null);
   const arrowRef = useRef(null);
 
-  const indexRef = useRef(null);
-  const indexLineRef = useRef(null);
   const identityDataRef = useRef(null);
 
   const identityNameRef = useRef(null);
@@ -254,22 +252,6 @@ const Hero = () => {
 
     const introTl = gsap.timeline();
 
-    introTl.from(indexRef.current, {
-      y: 8,
-      opacity: 0,
-      duration: 0.4,
-    });
-
-    introTl.from(
-      indexLineRef.current,
-      {
-        scaleX: 0,
-        duration: 0.35,
-        ease: "power2.out",
-      },
-      "-=0.15",
-    );
-
     addType(introTl, identityNameRef.current, "IZAZ SAPUTRA", 0.4);
 
     addType(introTl, identityRoleRef.current, "CREATIVE DEVELOPER", 0.45);
@@ -321,6 +303,20 @@ const Hero = () => {
         end: "+=100%",
         scrub: 1,
         pin: true,
+
+        onEnter: () => {
+          setActiveSection({
+            number: "00",
+            label: "IDENTITY",
+          });
+        },
+
+        onEnterBack: () => {
+          setActiveSection({
+            number: "00",
+            label: "IDENTITY",
+          });
+        },
       },
     });
 
@@ -352,14 +348,6 @@ const Hero = () => {
       <div ref={cursorRef} className="cursor" />
 
       <div className="mono-index">
-        <div ref={indexRef} className="mono-index__chapter">
-          <span>00</span>
-          <span>/</span>
-          <span>IDENTITY</span>
-
-          <span ref={indexLineRef} className="mono-index__line" />
-        </div>
-
         <div className="mono-mark">
           <span>MONO</span>
           <span>/ 2026 </span>

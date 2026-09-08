@@ -18,7 +18,6 @@ const SectionIndex = ({ section }) => {
 
     const tl = gsap.timeline();
 
-    // section lama keluar ke atas
     tl.to([numberRef.current, labelRef.current], {
       yPercent: -120,
       opacity: 0,
@@ -31,12 +30,10 @@ const SectionIndex = ({ section }) => {
       },
     });
 
-    // pindahin text baru ke bawah
     tl.set([numberRef.current, labelRef.current], {
       yPercent: 120,
     });
 
-    // section baru masuk dari bawah
     tl.to([numberRef.current, labelRef.current], {
       yPercent: 0,
       opacity: 1,
@@ -45,7 +42,6 @@ const SectionIndex = ({ section }) => {
       stagger: 0.05,
     });
 
-    // garis sedikit bereaksi
     tl.fromTo(
       lineRef.current,
       {

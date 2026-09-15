@@ -15,7 +15,7 @@ const Manifesto = ({ setActiveSection }) => {
 
   useGSAP(() => {
     const manifesto = manifestoRef.current;
-    if (!manifesto) return; 
+    if (!manifesto) return;
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -82,24 +82,43 @@ const Manifesto = ({ setActiveSection }) => {
   }, [setActiveSection]);
 
   return (
-    <section ref={manifestoRef} id="manifesto" className="manifesto">
-      <div className="manifesto-inner">
-        <p ref={introRef} className="manifesto-intro">
+    <section className="manifesto">
+      <div className="manifesto-intro">
+        <p className="manifesto-label">A SMALL STATEMENT ABOUT HOW I BUILD</p>
+
+        <h2 className="manifesto-title">
           I TURN IDEAS
           <br />
           INTO <span>INTERFACES.</span>
-        </p>
+        </h2>
+      </div>
 
-        <div className="manifesto-lines">
-          <p ref={codeRef}>CODE GIVES THEM STRUCTURE.</p>
-          <p ref={designRef}>DESIGN GIVES THEM FORM.</p>
-          <p ref={motionRef}>
-            MOTION MAKES THEM{" "}
-            <span ref={aliveRef} className="manisfesto-alive">
-              ALIVE.
-            </span>
+      <div className="manifesto-scenes">
+        <article className="manifesto-scene">
+          <span className="manifesto-scene-number">01</span>
+
+          <h3 className="manifesto-scene-word">CODE</h3>
+
+          <p className="manifesto-scene-desc">GIVES THEM STRUCTURE.</p>
+        </article>
+
+        <article className="manifesto-scene">
+          <span className="manifesto-scene-number">02</span>
+
+          <h3 className="manifesto-scene-word">DESIGN</h3>
+
+          <p className="manifesto-scene-desc">GIVES THEM FORM.</p>
+        </article>
+
+        <article className="manifesto-scene">
+          <span className="manifesto-scene-number">03</span>
+
+          <h3 className="manifesto-scene-word">MOTION</h3>
+
+          <p className="manifesto-scene-desc">
+            MAKES THEM <span>ALIVE.</span>
           </p>
-        </div>
+        </article>
       </div>
     </section>
   );

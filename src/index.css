@@ -338,64 +338,151 @@ body {
    ============================================================ */
 .manifesto {
   position: relative;
-
-  min-height: 100vh;
-
+  padding: clamp(100px, 16vh, 180px) 3.6vw clamp(80px, 12vh, 160px);
   background: #000;
   color: #fff;
-
-  overflow: hidden;
-}
-
-.manifesto-inner {
-  min-height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  padding: 8vh 3.6vw;
 }
 
 .manifesto-intro {
-  margin: 0 0 10vh;
-
-  font-size: clamp(3rem, 7vw, 8rem);
-  line-height: 0.92;
-  letter-spacing: -0.065em;
-
-  text-transform: uppercase;
+  max-width: 1400px;
+  margin: 0 auto clamp(80px, 14vh, 160px);
 }
 
-.manifesto-intro span {
-  font-family: "Playfair Display", serif;
-  font-style: italic;
-  letter-spacing: 0.8px;
+.manifesto-label {
+  margin-bottom: clamp(24px, 4vw, 56px);
+  font-family: "Geist", Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.16em;
+  color: #a3a3a3;
 }
 
-.manifesto-lines {
-  display: flex;
-  flex-direction: column;
-
-  gap: 0.15em;
-
-  font-size: clamp(2rem, 4.5vw, 5.5rem);
+.manifesto-title {
+  font-family: "Geist", Arial, sans-serif;
+  font-size: clamp(2rem, 7.4vw, 7.5rem);
+  font-weight: 400;
   line-height: 1.05;
-  letter-spacing: -0.035em;
-
-  text-transform: uppercase;
+  letter-spacing: -0.055em;
 }
 
-.manifesto-lines p {
-  margin: 0;
-  font-family: "GeneralSans", Arial, sans-serif;
-  font-weight: 300;
+.manifesto-title span {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+}
 
-  color: #292929;
+.manifesto-scenes {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.manifesto-scene {
+  display: grid;
+  grid-template-columns: minmax(28px, 0.4fr) minmax(0, 2fr) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(16px, 3vw, 48px);
+  padding: clamp(40px, 7vw, 100px) 0;
+  border-top: 1px solid #333;
+}
+
+.manifesto-scene:last-child {
+  border-bottom: 1px solid #333;
+}
+
+.manifesto-scene-number {
+  align-self: start;
+  padding-top: 0.6em;
+  font-family: "Geist", Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #a3a3a3;
+}
+
+.manifesto-scene-word {
+  min-width: 0;
+  font-family: "Geist", Arial, sans-serif;
+  font-size: clamp(3rem, 10vw, 9rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.065em;
+}
+
+.manifesto-scene-desc {
+  max-width: 15ch;
+  padding-bottom: 0.2em;
+  font-family: "Geist", Arial, sans-serif;
+  font-size: clamp(0.875rem, 1.5vw, 1.375rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: #a3a3a3;
+}
+
+.manifesto-scene:nth-child(2) {
+  grid-template-columns: minmax(28px, 0.4fr) minmax(0, 1fr) minmax(0, 2fr);
+}
+
+.manifesto-scene:nth-child(2) .manifesto-scene-word {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+}
+
+.manifesto-scene:nth-child(2) .manifesto-scene-desc {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .manifesto-alive {
   display: inline-block;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .manifesto {
+    padding: 100px 6vw 80px;
+  }
+
+  .manifesto-label {
+    max-width: 28ch;
+    font-size: 10px;
+  }
+
+  .manifesto-title {
+    font-size: clamp(1.5rem, 7.2vw, 3.5rem);
+  }
+
+  .manifesto-scene,
+  .manifesto-scene:nth-child(2) {
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 20px 16px;
+    padding: 40px 0;
+  }
+
+  .manifesto-scene .manifesto-scene-word {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+    font-size: clamp(2.5rem, 12vw, 5.5rem);
+  }
+
+  .manifesto-scene .manifesto-scene-desc {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: 24ch;
+  }
+
+  .manifesto-scene:nth-child(2) .manifesto-scene-word {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .manifesto-scene:nth-child(2) .manifesto-scene-desc {
+    grid-row: 2;
+  }
 }
 
 /* ============================================================

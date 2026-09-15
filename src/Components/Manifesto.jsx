@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Manifesto = ({ setActiveSection }) => {
   const manifestoRef = useRef(null);
+  const introRef = useRef(null);
 
   useGSAP(() => {
     const manifesto = manifestoRef.current;
@@ -39,11 +40,28 @@ const Manifesto = ({ setActiveSection }) => {
         });
       },
     });
+
+    const intro = introRef.current;
+
+    if (!intro) return;
+
+    gsap.from(intro, {
+      y: 60,
+      duration: 1,
+      opacity: 0,
+      ease: "power3.inOut",
+
+      scrollTrigger: {
+        trigger: intro,
+        start: "top 65%",
+        toggleActions: "play none none reverse",
+      },
+    });
   }, [setActiveSection]);
 
   return (
     <section ref={manifestoRef} className="manifesto">
-      <div className="manifesto-intro">
+      <div ref={introRef} className="manifesto-intro">
         <p className="manifesto-label">A SMALL STATEMENT ABOUT HOW I BUILD</p>
 
         <h2 className="manifesto-title">

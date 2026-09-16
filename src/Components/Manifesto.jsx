@@ -45,17 +45,84 @@ const Manifesto = ({ setActiveSection }) => {
 
     if (!intro) return;
 
-    gsap.from(intro, {
-      y: 60,
-      duration: 1,
-      opacity: 0,
-      ease: "power3.inOut",
+    const label = intro.querySelector(".manifesto-label");
+    const title = intro.querySelector(".manifesto-title");
 
+    if (!label || !title) return;
+
+    const introTl = gsap.timeline({
+      defaults: {
+        opacity: 0,
+        ease: "power3.out",
+      },
       scrollTrigger: {
         trigger: intro,
-        start: "top 65%",
+        start: "top 55%",
         toggleActions: "play none none reverse",
       },
+    });
+
+    introTl
+      .from(label, {
+        y: 20,
+        duration: 0.6,
+      })
+      .from(
+        title,
+        {
+          y: 40,
+          duration: 1,
+        },
+        "-=0.25",
+      );
+
+    const scenes = manifesto.querySelectorAll(".manifesto-scene");
+
+    scenes.forEach((scene, index) => {
+      const number = scene.querySelector(".manifesto-scene-number");
+      const word = scene.querySelector(".manifesto-scene-word");
+      const description = scene.querySelector(".manifesto-scene-desc");
+
+      if (!number || !word || !description) return;
+
+      const direction = index === 1 ? 1 : -1;
+
+      const sceneTl = gsap.timeline({
+        defaults: {
+          ease: "power3.out",
+        },
+
+        scrollTrigger: {
+          trigger: scene,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      sceneTl
+        .from(number, {
+          y: 12,
+          opacity: 0,
+          duration: 0.4,
+        })
+        .from(
+          word,
+          {
+            x: 60 * direction,
+            opacity: 0,
+            duration: 0.9,
+          },
+          "-=0.2",
+        )
+        .from(
+          description,
+          {
+            y: 24,
+            opacity: 0,
+            duration: 0.65,
+          },
+          "-=0.55",
+        );
     });
   }, [setActiveSection]);
 

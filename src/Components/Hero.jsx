@@ -5,6 +5,7 @@ import { words } from "../../constant/index.js";
 import { ArrowDown } from "lucide-react";
 import { SplitText } from "gsap/SplitText";
 import { initCursor } from "../utils/cursor.js";
+import { initHeroPointer } from "../utils/heroPointer.js";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -26,192 +27,20 @@ const Hero = ({ setActiveSection }) => {
   const voidFieldRef = useRef(null);
 
   useEffect(() => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-
-    const outline = outlineRef.current;
-    const textWrap = textWrapRef.current;
-
     const cleanupCursor = initCursor(cursorRef.current);
-
-    const xTo = gsap.quickTo(outline, "--cx", {
-      duration: 0.4,
-      ease: "power3.out",
+    const cleanupPointer = initHeroPointer({
+      hero: heroRef.current,
+      outline: outlineRef.current,
+      textWrap: textWrapRef.current,
+      web: webRef.current,
+      webOutline: webOutlineRef.current,
+      cursor: cursorRef.current,
+      field: voidFieldRef.current,
     });
-    const yTo = gsap.quickTo(outline, "--cy", {
-      duration: 0.4,
-      ease: "power3.out",
-    });
-
-    const handleMove = (e) => {
-      const rect = textWrap.getBoundingClientRect();
-      xTo(e.clientX - rect.left);
-      yTo(e.clientY - rect.top);
-    };
-
-    const handleLeave = () => {
-      xTo(-200);
-      yTo(-200);
-    };
-
-    window.addEventListener("mousemove", handleMove);
-    window.addEventListener("mouseleave", handleLeave);
 
     return () => {
+      cleanupPointer();
       cleanupCursor();
-      window.removeEventListener("mousemove", handleMove);
-      window.removeEventListener("mouseleave", handleLeave);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-
-    const web = webRef.current;
-    const webOutline = webOutlineRef.current;
-    const cursor = cursorRef.current;
-
-    if (!web || !webOutline || !cursor) return;
-
-    const targets = [web, webOutline];
-
-    gsap.set(targets, {
-      transformOrigin: "50% 90%",
-    });
-
-    const scaleXTo = gsap.quickTo(targets, "scaleX", {
-      duration: 0.6,
-      ease: "power3.out",
-    });
-
-    const scaleYTo = gsap.quickTo(targets, "scaleY", {
-      duration: 0.6,
-      ease: "power3.out",
-    });
-
-    const skewTo = gsap.quickTo(targets, "skewX", {
-      duration: 0.5,
-      ease: "power3.out",
-    });
-
-    const xTo = gsap.quickTo(targets, "x", {
-      duration: 0.6,
-      ease: "power3.out",
-    });
-
-    const yTo = gsap.quickTo(targets, "y", {
-      duration: 0.6,
-      ease: "power3.out",
-    });
-
-    const cursorScaleTo = gsap.quickTo(cursor, "--cursor-scale", {
-      duration: 0.35,
-      ease: "power3.out",
-    });
-
-    const cursorBorderTo = gsap.quickTo(cursor, "borderWidth", {
-      duration: 0.35,
-      ease: "power3.out",
-    });
-
-    const handleWebMove = (e) => {
-      const rect = web.getBoundingClientRect();
-
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      const deltaX = e.clientX - centerX;
-      const deltaY = e.clientY - centerY;
-
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-      const radius = 250;
-
-      const strength = gsap.utils.clamp(0, 1, 1 - distance / radius);
-
-      const normalizedX = gsap.utils.clamp(-1, 1, deltaX / radius);
-
-      const normalizedY = gsap.utils.clamp(-1, 1, deltaY / radius);
-
-      scaleXTo(1 + strength * 0.14);
-
-      scaleYTo(1 - strength * 0.04);
-
-      skewTo(normalizedX * strength * -8);
-
-      xTo(normalizedX * strength * 10);
-
-      yTo(normalizedY * strength * 4);
-
-      cursorScaleTo(1 + strength * 0.65);
-
-      cursorBorderTo(2 - strength);
-    };
-
-    const resetWeb = () => {
-      scaleXTo(1);
-      scaleYTo(1);
-      skewTo(0);
-      xTo(0);
-      yTo(0);
-      cursorScaleTo(1);
-      cursorBorderTo(2);
-    };
-
-    window.addEventListener("mousemove", handleWebMove);
-    window.addEventListener("mouseleave", resetWeb);
-
-    return () => {
-      window.removeEventListener("mousemove", handleWebMove);
-      window.removeEventListener("mouseleave", resetWeb);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-
-    const field = voidFieldRef.current;
-    if (!field) return;
-
-    gsap.set(field, {
-      "--mx": window.innerWidth / 2,
-      "--my": window.innerHeight / 2,
-      "--field-alpha": 0.015,
-    });
-    const xTo = gsap.quickTo(field, "--mx", {
-      duration: 0.6,
-      ease: "power3.out",
-    });
-
-    const yTo = gsap.quickTo(field, "--my", {
-      duration: 0.6,
-      ease: "power3.out",
-    });
-
-    const alphaTo = gsap.quickTo(field, "--field-alpha", {
-      duration: 0.8,
-      ease: "power2.out",
-    });
-
-    let idleTimer;
-
-    const handleMove = (e) => {
-      xTo(e.clientX);
-      yTo(e.clientY);
-
-      alphaTo(0.055);
-
-      clearTimeout(idleTimer);
-
-      idleTimer = setTimeout(() => {
-        alphaTo(0.012);
-      }, 700);
-    };
-
-    window.addEventListener("mousemove", handleMove);
-
-    return () => {
-      clearTimeout(idleTimer);
-      window.removeEventListener("mousemove", handleMove);
     };
   }, []);
 

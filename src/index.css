@@ -435,10 +435,15 @@ body {
 }
 
 .manifesto-alive {
-  display: inline-block;
+  display: block;
+  width: fit-content;
+  margin-top: 0.08em;
+
   font-family: "Playfair Display", Georgia, serif;
   font-style: italic;
   color: #fff;
+  line-height: 1.05;
+  font-size: 2em;
 }
 
 @media (max-width: 768px) {

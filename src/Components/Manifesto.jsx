@@ -82,6 +82,7 @@ const Manifesto = ({ setActiveSection }) => {
       const number = scene.querySelector(".manifesto-scene-number");
       const word = scene.querySelector(".manifesto-scene-word");
       const description = scene.querySelector(".manifesto-scene-desc");
+      const alive = scene.querySelector(".manifesto-alive");
 
       if (!number || !word || !description) return;
 
@@ -123,6 +124,27 @@ const Manifesto = ({ setActiveSection }) => {
           },
           "-=0.55",
         );
+      if (alive) {
+        gsap.set(alive, {
+          transformOrigin: "left center",
+        });
+
+        sceneTl
+          .to(
+            alive,
+            {
+              scaleX: 1.1,
+              duration: 0.35,
+              ease: "power2.out",
+            },
+            "+=0.1",
+          )
+          .to(alive, {
+            scaleX: 1,
+            duration: 0.55,
+            ease: "power2.inOut",
+          });
+      }
     });
   }, [setActiveSection]);
 

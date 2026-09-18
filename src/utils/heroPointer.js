@@ -1,6 +1,5 @@
 import gsap from "gsap";
 
-// Keep the visual settings in one place; mouse events only request one frame.
 export function initHeroPointer({
   hero,
   outline,

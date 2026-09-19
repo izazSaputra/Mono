@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Hero from "./Components/Hero";
 import Manifesto from "./Components/Manifesto";
 import SectionIndex from "./Components/SectionIndex";
+import SelectedWorks from "./Components/SelectedWorks";
 
 const App = () => {
   const [activeSection, setActiveSection] = useState({
@@ -17,6 +18,8 @@ const App = () => {
       <Hero setActiveSection={setActiveSection} />
 
       <Manifesto setActiveSection={setActiveSection} />
+
+      <SelectedWorks setActiveSection={setActiveSection}/>
     </main>
   );
 };

@@ -1,9 +1,54 @@
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "../data/projects";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const SelectedWorks = () => {
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+const SelectedWorks = ({ setActiveSection }) => {
+  const sectionRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const section = sectionRef.current;
+
+      if (!section) return;
+
+      const activateWorks = () => {
+        setActiveSection({
+          number: "02",
+          label: "SELECTED WORKS",
+        });
+      };
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 60%",
+        end: "bottom 40%",
+
+        onEnter: activateWorks,
+        onEnterBack: activateWorks,
+
+        onLeaveBack: () => {
+          setActiveSection({
+            number: "01",
+            label: "MANIFESTO",
+          });
+        },
+      });
+    },
+    {
+      scope: sectionRef,
+      dependencies: [setActiveSection],
+      revertOnUpdate: true,
+    },
+  );
+
   return (
     <section
+      ref={sectionRef}
       id="selected-works"
       className="selected-works"
       aria-labelledby="selected-works-title"
@@ -23,23 +68,29 @@ const SelectedWorks = () => {
       <div className="selected-works-list">
         {projects.map((project) => (
           <article className="project-card" key={project.id}>
+            {project.image && (
+              <div className="project-card-preview">
+                <img
+                  src={project.image}
+                  alt={`Tampilan antarmuka ${project.title}`}
+                  loading="lazy"
+                  decoding="async"
+                  width={1600}
+                  height={1000}
+                />
+              </div>
+            )}
             <div className="project-card-meta">
-              <span className="project-card-number">
-                {project.number}
-              </span>
+              <span className="project-card-number">{project.number}</span>
 
-              <p className="project-card-category">
-                {project.category}
-              </p>
+              <p className="project-card-category">{project.category}</p>
             </div>
 
             <h3 className="project-card-title">{project.title}</h3>
 
             <p className="project-card-role">{project.role}</p>
 
-            <p className="project-card-description">
-              {project.description}
-            </p>
+            <p className="project-card-description">{project.description}</p>
 
             <div className="project-card-links">
               <a

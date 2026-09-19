@@ -9,16 +9,7 @@ export const projects = [
       "Developed the entire frontend for a team-built platform that turns education data into insights and action plans.",
     url: "https://akar.lokashaka.id/dinas/profil",
     repository: "https://github.com/HaqiKuy470/Akar-TimEsTehPlastik",
-  },
-  {
-    id: "smilework",
-    number: "02",
-    title: "SMILEWORK",
-    category: "Services & Project Showcase",
-    role: "Frontend Development",
-    description:
-      "Built the frontend for a website showcasing lighting, interior, and electronic installation services.",
-    url: "https://smilework.id/",
+    image: "/images/projects/akar.png",
   },
   {
     id: "samira-travel",
@@ -29,5 +20,17 @@ export const projects = [
     description:
       "Built the frontend for an umrah travel website featuring packages, galleries, company information, and contact options.",
     url: "https://umrohsamirakediri.com/",
+    image: "/images/projects/samira.png",
+  },
+  {
+    id: "smilework",
+    number: "02",
+    title: "SMILEWORK",
+    category: "Services & Project Showcase",
+    role: "Frontend Development",
+    description:
+      "Built the frontend for a website showcasing lighting, interior, and electronic installation services.",
+    url: "https://smilework.id/",
+    image: "/images/projects/smilework.png",
   },
 ];

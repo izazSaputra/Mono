@@ -446,6 +446,175 @@ body {
   font-size: 2em;
 }
 
+/* ============================================================
+   SELECTED WORKS
+   ============================================================ */
+.selected-works {
+  padding: clamp(100px, 14vh, 180px) 3.6vw;
+  background: #000;
+  color: #fff;
+  font-family: "Geist", Arial, sans-serif;
+}
+
+.selected-works-header,
+.selected-works-list {
+  max-width: 1400px;
+  margin-inline: auto;
+}
+
+.selected-works-header {
+  margin-bottom: clamp(64px, 10vw, 140px);
+}
+
+.selected-works-label {
+  margin-bottom: 28px;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.16em;
+  color: #a3a3a3;
+}
+
+.selected-works-title {
+  font-size: clamp(2.5rem, 8vw, 8rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+}
+
+.selected-works-title span {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+}
+
+.selected-works-intro {
+  max-width: 38ch;
+  margin-top: 28px;
+  font-size: clamp(14px, 1.3vw, 18px);
+  line-height: 1.7;
+  color: #a3a3a3;
+}
+
+.project-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  column-gap: clamp(24px, 5vw, 80px);
+  row-gap: 20px;
+  padding: clamp(40px, 6vw, 80px) 0;
+  border-top: 1px solid #333;
+}
+
+.project-card:last-child {
+  border-bottom: 1px solid #333;
+}
+
+.project-card-meta {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  color: #a3a3a3;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-card-title {
+  grid-column: 1;
+  grid-row: span 3;
+  font-size: clamp(2rem, 5vw, 5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+}
+
+.project-card-role,
+.project-card-description,
+.project-card-links {
+  grid-column: 2;
+}
+
+.project-card-role {
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.project-card-description {
+  max-width: 46ch;
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.75;
+  color: #a3a3a3;
+}
+
+.project-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  margin-top: 8px;
+}
+
+.project-card-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: #fff;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.project-card-links a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 5px;
+}
+
+@media (max-width: 768px) {
+  .selected-works {
+    padding: 100px 6vw 80px;
+  }
+
+  .project-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-card-title {
+    grid-row: auto;
+  }
+
+  .project-card-role,
+  .project-card-description,
+  .project-card-links {
+    grid-column: 1;
+  }
+
+  .project-card-meta {
+    gap: 16px;
+  }
+}
+
+.project-card-preview {
+  grid-column: 1 / -1;
+
+  width: 100%;
+  max-width: 960px;
+  justify-self: center;
+
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #111;
+}
+
+.project-card-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 @media (max-width: 768px) {
   .manifesto {
     padding: 100px 6vw 80px;
